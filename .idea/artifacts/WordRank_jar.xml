@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="WordRank:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/WordRank_jar</output-path>
+    <root id="archive" name="WordRank.jar">
+      <element id="module-output" name="WordRank" />
+    </root>
+  </artifact>
+</component>
