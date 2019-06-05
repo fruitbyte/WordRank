@@ -18,8 +18,10 @@ import javafx.stage.FileChooser;
 
 import javafx.event.ActionEvent;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -60,27 +62,50 @@ public class Controller implements Initializable{
     public void startBtnClick(ActionEvent event) throws IOException {
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
-
-        //While loop that checks if there is something next
-        while(scanner.hasNext()){
+        while(scanner.hasNext()) {
             String word = scanner.next();
+            System.out.println(word);
+            System.out.println(words.size());
             Word wordObject = new Word(word);
-            if(words.contains(wordObject)){
-                int count = wordObject.getCountProperty();
-                wordObject.setCountProperty(count);
+            if(words.size() > 0) {
+                ArrayList<String> tempPosArray = new ArrayList<String>();
+                for(int j = 0; j < words.size(); j++) {
+                    tempPosArray.add(j, words.get(j).getWordProperty());
+                    System.out.println(tempPosArray);
+//                    if(words.get(j).getWordProperty().equals(wordObject.getWordProperty())) {
+//                        int count = words.get(j).getCountProperty() + 1;
+//                        words.get(j).setCountProperty(count);
+//                        System.out.println(wordObject.getWord());
+//                    } else {
+//                        wordObject.setCountProperty(1); //Sets initial count to 1.
+//                        words.add(wordObject); //Adds the word to words arrayList.
+//                        System.out.println(wordObject.getWord());
+//                    }
+                }
+                if(tempPosArray.contains(wordObject.getWordProperty())){
+                    int index = tempPosArray.indexOf(wordObject.getWordProperty());
+                    int count = words.get(index).getCountProperty() + 1;
+                    words.get(index).setCountProperty(count);
+                    System.out.println(wordObject.getWord());
+                } else {
+                    wordObject.setCountProperty(1); //Sets initial count to 1.
+                        words.add(wordObject); //Adds the word to words arrayList.
+                        System.out.println(wordObject.getWord());
+                }
+                tempPosArray.clear();
             } else {
                 wordObject.setCountProperty(1); //Sets initial count to 1.
                 words.add(wordObject); //Adds the word to words arrayList.
+                System.out.println("Added: " + wordObject.getWord());
             }
         }
-        scanner.close(); //Closes the scanner.
 
         wordColumn.setCellValueFactory(new PropertyValueFactory<>("wordProperty"));     //Word Column
         countColumn.setCellValueFactory(new PropertyValueFactory<>("countProperty"));   //Count Column
 
         tableView.setItems(getWords());
-
-    }
+        }
+//        scanner.close(); //Closes the scanner.
 
     public ObservableList<Word> getWords() {
         return words;

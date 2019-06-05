@@ -33,6 +33,11 @@ public class Word {
         return countProperty;
     }
 
+    public String getWord() {
+        String wordString = wordProperty + Integer.toString(countProperty);
+        return wordString;
+    }
+
     public void setCountProperty(int countProperty) {
         this.countProperty = countProperty;
     }
