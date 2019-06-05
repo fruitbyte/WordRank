@@ -72,15 +72,6 @@ public class Controller implements Initializable{
                 for(int j = 0; j < words.size(); j++) {
                     tempPosArray.add(j, words.get(j).getWordProperty());
                     System.out.println(tempPosArray);
-//                    if(words.get(j).getWordProperty().equals(wordObject.getWordProperty())) {
-//                        int count = words.get(j).getCountProperty() + 1;
-//                        words.get(j).setCountProperty(count);
-//                        System.out.println(wordObject.getWord());
-//                    } else {
-//                        wordObject.setCountProperty(1); //Sets initial count to 1.
-//                        words.add(wordObject); //Adds the word to words arrayList.
-//                        System.out.println(wordObject.getWord());
-//                    }
                 }
                 if(tempPosArray.contains(wordObject.getWordProperty())){
                     int index = tempPosArray.indexOf(wordObject.getWordProperty());
